@@ -75,3 +75,9 @@
 .nav-link:focus {
   outline: none;
 }
+
+@media (max-width: 768px) {
+  .global-navbar {
+    display: none;
+  }
+}

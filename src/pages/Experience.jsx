@@ -164,28 +164,28 @@ function Experience() {
 
   const projects = [
     {
-      imageSrc: '/images/ur5-arm.png',
+      imageSrc: './images/ur5-arm.png',
       title: 'UR5 Greeting and Imitation',
       githubUrl: 'https://github.com/JonahBlackmon/ur5-greeting-imitation',
       description: 'Human-robot interaction framework in ROS fascilitating gesture recognition and real-time imitation of user movements',
       bgColor: "#ACF39D"
     },
     {
-      imageSrc: '/images/QuoteIt-logo.png',
+      imageSrc: './images/QuoteIt-logo.png',
       title: 'QuoteIt Social Media App',
       githubUrl: 'https://github.com/JonahBlackmon/QuoteIt',
       description: 'Full-stack social media app developed and published to the App Store. Automatic transcription and posting of the last 20 seconds of conversation retroactively',
       bgColor: "#F2C6DE"
     },
     {
-      imageSrc: '/images/mars-icon.png',
+      imageSrc: './images/mars-icon.png',
       title: 'Mars Weather Forecasting',
       githubUrl: 'https://github.com/JonahBlackmon/mars-weather-predictor',
       description: 'Linear Regression model trained on Curiosity rover data to forecast future weather conditions at the Gale Crater',
       bgColor: "#FFB140"
     },
     {
-      imageSrc: '/images/cube-icon.png',
+      imageSrc: './images/cube-icon.png',
       title: 'Text-to-3D Model Generator',
       githubUrl: 'https://github.com/JonahBlackmon/3d-render-engine',
       description: 'Pipeline that transforms user prompts into animated 3D models with custom implementations of projection matrices and a vertex connectivity algorithm',
@@ -241,11 +241,11 @@ function Experience() {
 
   const icons = [
     {
-      imageSrc: '/images/github-icon.png',
+      imageSrc: './images/github-icon.png',
       URL: 'https://github.com/JonahBlackmon'
     },
     {
-      imageSrc: '/images/linkedin-icon.png',
+      imageSrc: './images/linkedin-icon.png',
       URL: 'https://linkedin.com/in/jonahkblackmon'
     }
   ];
@@ -259,7 +259,7 @@ function Experience() {
         <div className="header-subrow">
           <IconRow items={icons} />
           <button
-            onClick={() => window.open('/images/Jonah Blackmon - College Resume.pdf', '_blank')}
+            onClick={() => window.open('./images/Jonah Blackmon - College Resume.pdf', '_blank')}
             className="resume-button"
           >
             View My Resume
@@ -269,10 +269,12 @@ function Experience() {
       <section id="projects">
       <h1 className="experience-title">Projects</h1>
       </section>
+      <div className="projects-container">
       <div className="projects-grid">
         {projects.map((project, idx) => (
           <ProjectCard key={idx} delay={idx * 0.1} {...project} />
         ))}
+      </div>
       </div>
       <section id="experience">
       <h1 className="work-experience">Experience</h1>

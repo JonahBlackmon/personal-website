@@ -9,7 +9,7 @@
   position: relative;
   opacity: 0;
   animation: fadeInUp 0.6s cubic-bezier(0.33, 1, 0.68, 1) both;
-
+  max-width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -37,21 +37,9 @@
   opacity: 1;
 }
 
-.project-card::after {
-  content: "";
-  position: absolute;
-  top: 64%;
-  left: 7.5%;
-  height: 2px;
-  width: 85%;
-  background: rgb(29, 29, 29);
-  opacity: 10%;
-  border-radius: 2px;
-}
-
 .project-image {
-  height: 180px;
-  width: 180px;
+  height: 80%;
+  width: 80%;
   object-fit: cover;
   border-radius: 4px;
   margin-bottom: 0;
@@ -61,7 +49,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 2%;
+  margin-left: 15%;
 }
 
 .project-title {
@@ -70,6 +58,9 @@
   color: #4B5563;
   font-family: 'DM Sans', sans-serif;
   margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid rgba(29,29,29,0.1);
 }
 
 .project-description {
@@ -98,6 +89,19 @@
   padding: 1rem;
   padding-top: 2rem;
   grid-auto-rows: 1fr;
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    justify-content: center;
+  }
+
+  .project-card {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 320px;
+  }
 }
 
 @keyframes fadeInUp {
@@ -156,15 +160,10 @@
   margin-bottom: 0;
 }
 
-.work-header::after {
-  content: "";
-  position: absolute;
-  top: 3.5rem;
-  height: 2px;
-  width: 100%;
-  background: black;
-  opacity: 10%;
-  border-radius: 2px;
+.work-header {
+  position: relative;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid rgba(29,29,29,0.1);
 }
 
 .work-description {
@@ -198,24 +197,14 @@
 .tech-stack {
   font-size: 20px;
   position: relative;
-}
-
-.tech-stack::after {
-  content: "";
-  position: absolute;
-  top: 200%;
-  left: 0;
-  height: 2px;
-  width: 100%;
-  background: rgb(29, 29, 29);
-  opacity: 10%;
-  border-radius: 2px;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(29,29,29,0.1);
 }
 
 .tech-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  padding-top: 5%;
+  grid-template-columns: repeat(3, 1fr);
+  padding-top: 0.5rem;
   gap: 12%;
 }
 
@@ -245,42 +234,24 @@
 
 .about-me {
   position: relative;
-}
-
-.about-me::after {
-  content: "";
-  position: absolute;
-  top: 107%;
-  left: 0;
-  height: 2px;
-  width: 100%;
-  background: rgb(29, 29, 29);
-  opacity: 10%;
-  border-radius: 2px;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(29,29,29,0.1);
+  max-width: 100%;
 }
 
 .icon-button {
-  width: 25px;
-  height: 25px;
-  padding-right: 15px;
+  width: 2rem;
+  height: auto;
+  padding-right: 1rem;
+  margin-right: 1rem;
 }
 
 .contact {
   font-size: 20px;
-  position: relative;
   margin-top: 7%;
-}
-
-.contact::after {
-  content: "";
-  position: absolute;
-  top: 200%;
-  left: 0;
-  height: 2px;
-  width: 100%;
-  background: rgb(29, 29, 29);
-  opacity: 10%;
-  border-radius: 2px;
+  position: relative;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(29,29,29,0.1);
 }
 
 .my-name {
@@ -297,6 +268,12 @@
   position: relative;
 }
 
+.icon-row {
+  display: flex;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
 .resume-button,
 .resume-button:hover,
 .resume-button:focus,
@@ -305,8 +282,48 @@
   border-color: transparent;
   background-color: transparent;
   color: #4B5563;
+  margin: 0;
+  padding: 0;
 }
 
 .resume-button:hover {
   opacity: 50%;
+}
+
+@media (max-width: 768px) {
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 1rem;
+  }
+
+  .work-card {
+    grid-column: auto !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 1rem; /* adjust spacing as needed */
+    justify-content: center;
+  }
+
+  .project-card {
+    max-width: none; /* allow cards to fill grid columns */
+    width: 100%;      /* make cards fill their column */
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 90%; /* scales all fonts to 90% of their original size */
+  }
 }
