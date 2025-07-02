@@ -1,16 +1,13 @@
-import { Routes, Route, NavLink } from 'react-router-dom';
+// import { Routes, Route, NavLink } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import Home from './pages/Home';
-import About from './pages/About';
-import Projects from './pages/Projects';
-import Contact from './pages/Contact-Me'
+import Experience from './pages/Experience';
 import './App.css';
-import GooeyBubbles from './GooeyBubbles';
 
 
 function App() {
   const navRef = useRef(null);
+  
   const [hoverStyle, setHoverStyle] = useState({
     x: 0,
     y: 0,
@@ -41,53 +38,33 @@ function App() {
 
   return (
     <>
-      <nav className="global-navbar" ref={navRef}>
-        <motion.div
-          className="nav-hover-bg"
-          animate={hoverStyle}
-          transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-        />
-
-        <NavLink
-          to="/"
-          onMouseEnter={handleHover}
-          onMouseLeave={clearHover}
-          className="nav-link"
-        >
-          Home
-        </NavLink>
-        <NavLink
-          to="/about"
-          onMouseEnter={handleHover}
-          onMouseLeave={clearHover}
-          className="nav-link"
-        >
-          About
-        </NavLink>
-        <NavLink
-          to="/projects"
-          onMouseEnter={handleHover}
-          onMouseLeave={clearHover}
-          className="nav-link"
-        >
-          Projects
-        </NavLink>
-        <NavLink
-          to="/contact-me"
-          onMouseEnter={handleHover}
-          onMouseLeave={clearHover}
-          className="nav-link"
-        >
-          Contact Me
-        </NavLink>
-      </nav>
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/contact-me" element={<Contact />} />
-      </Routes>
+    <div className="page-container">
+      <div className="projects-section">
+          <nav className="global-navbar" ref={navRef}>
+            <motion.div
+              className="nav-hover-bg"
+              animate={hoverStyle}
+              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+            />
+            <a
+              href="#home"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onMouseEnter={handleHover}
+              onMouseLeave={clearHover}
+              className="nav-link"
+            >
+              Home
+            </a>
+            <a href="#projects" onMouseEnter={handleHover} onMouseLeave={clearHover} className="nav-link">Projects</a>
+            <a href="#experience" onMouseEnter={handleHover} onMouseLeave={clearHover} className="nav-link">Experience</a>
+            <a href="#contact" onMouseEnter={handleHover} onMouseLeave={clearHover} className="nav-link">Contact Me</a>
+          </nav>
+        </div>
+        <Experience />
+      </div>
     </>
   );
 }
