@@ -2,7 +2,7 @@
   "name": "personal-website",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://JonahBlackmon.github.io/pesronal-website",
+  "homepage": "https://JonahBlackmon.github.io/personal-website",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "postbuild": "cp CNAME dist/"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -33,4 +34,5 @@
     "globals": "^16.2.0",
     "vite": "^7.0.0"
   }
+  
 }

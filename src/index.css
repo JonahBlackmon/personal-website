@@ -18,10 +18,12 @@ html, body {
   padding: 0;
   min-height: 100vh;
   background-color: #FAF9F7;
-  background-image: linear-gradient(to top, #FAF9F7 0%, #FAF9F7 80%, #b4e1ff46 95%);
+  background-image: linear-gradient(to top, #FAF9F7 0%, #FAF9F7 80%, #b4e1ff19 95%);
   background-repeat: no-repeat;
   background-size: cover;
   color: inherit;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 html {
@@ -91,11 +93,6 @@ button:focus-visible {
   .welcome-section {
     width: 100% !important;
     font-size: 1rem !important;
-  }
-
-  .tech-grid {
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
   }
 
   .icon-button {
