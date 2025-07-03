@@ -91,18 +91,6 @@
   grid-auto-rows: 1fr;
 }
 
-@media (max-width: 768px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-    justify-content: center;
-  }
-
-  .project-card {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 320px;
-  }
-}
 
 @keyframes fadeInUp {
   0% {
@@ -306,29 +294,24 @@
     width: 100%;
     box-sizing: border-box;
   }
-}
 
-@media (max-width: 768px) {
   .projects-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns */
-    gap: 1rem; /* adjust spacing as needed */
-    justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
 
   .project-card {
-    max-width: none; /* allow cards to fill grid columns */
-    width: 100%;      /* make cards fill their column */
-    margin-left: 0;
-    margin-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: none;
+    width: 100%;
   }
 
   .project-image-container {
     margin-left: 0;
   }
-}
 
-@media (max-width: 768px) {
   html {
-    font-size: 90%; /* scales all fonts to 90% of their original size */
+    font-size: 90%;
   }
 }
