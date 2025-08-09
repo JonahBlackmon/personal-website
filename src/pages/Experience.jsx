@@ -171,10 +171,17 @@ function Experience() {
       bgColor: "#ACF39D"
     },
     {
+      imageSrc: './images/CampusNav-Transparent.png',
+      title: 'CampusNav - Navigation',
+      githubUrl: 'https://github.com/JonahBlackmon/campusnav',
+      description: 'Full-stack navigation app for college students. Custom routing for college campus\' with built in local event publishing system',
+      bgColor: "#D3B5FF"
+    },
+    {
       imageSrc: './images/QuoteIt-logo.png',
       title: 'QuoteIt Social Media App',
       githubUrl: 'https://github.com/JonahBlackmon/QuoteIt',
-      description: 'Full-stack social media app developed and published to the App Store. Automatic transcription and posting of the last 20 seconds of conversation retroactively',
+      description: 'Full-stack social media app. Automatic transcription and posting of the last 20 seconds of conversation retroactively',
       bgColor: "#F2C6DE"
     },
     {
