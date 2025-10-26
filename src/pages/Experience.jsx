@@ -174,8 +174,22 @@ function Experience() {
       imageSrc: './images/CampusNav-Transparent.png',
       title: 'CampusNav - Navigation',
       githubUrl: 'https://github.com/JonahBlackmon/campusnav',
-      description: 'Full-stack navigation app for college students. Custom routing for college campus\' with built in local event publishing system',
+      description: 'Full-stack navigation app for college students. Custom routing for college campuses with built in local event publishing system',
       bgColor: "#D3B5FF"
+    },
+    {
+      imageSrc: './images/toyota_logo.png',
+      title: 'CarGaze - HackTX Best Pitch Winner',
+      githubUrl: 'https://github.com/JonahBlackmon/hacktx-fall-2025',
+      description: 'Hackathon project for the Toyota FNS Track at HackTX. Full-stack mobile application that dynamically pairs users with cars based on preferences/user hueristics',
+      bgColor: "#FF9E9E"
+    },
+    {
+      imageSrc: './images/lhd_transparent.png',
+      title: 'Mobilize UT',
+      githubUrl: 'https://github.com/Longhorn-Developers/Mobilize',
+      description: 'Full-stack mobile application to provide optimized and dynamic routing options to students that may require disability accomodation',
+      bgColor: "#FFD68A"
     },
     {
       imageSrc: './images/QuoteIt-logo.png',
@@ -202,11 +216,25 @@ function Experience() {
 
   const work = [
     {
+      title: "Undergraduate Course Assistant for Discrete Mathematics",
+      description: "Teaching Assistant for Discrete Mathematics (CS 311) at the University of Texas at Austin. Supported instruction for 400+ students by holding office hours and leading weekly discussion sections (~60 students) to reinforce course concepts",
+      dateRange: "Aug 2025 - Present",
+      width: "100%",
+      color: "#D3B5FF"
+    },
+    {
       title: "Autonomous Intelligent Robotics Research",
       description: "Member of UT Austin’s Freshman Research Initiative (FRI) program with a focus on autonomous intelligent robotics and their role in human-robot interaction. Led the development of gesture-based interaction models for industrial robots, exploring social signaling and autonomous behavior in shared workspaces",
       dateRange: "Jan 2025 - Present",
-      width: "100%",
+      width: "50%",
       color: "#B4E1FF"
+    },
+    {
+      title: "Longhorn Developers",
+      description: "Developer fellow for the Longhorn Developers UT Mobilize team at the University of Texas at Austin. Developing a mobile app to assist UT students with disabilities in navigating campus using accessible routing.",
+      dateRange: "Aug 2025 - Present",
+      width: "50%",
+      color: "#FF9E9E"
     },
     {
       title: "IT-Integrations",
@@ -262,7 +290,7 @@ function Experience() {
       <div className="experience-text">
       <div className="about-me">
         <h1 className="my-name">Jonah Blackmon</h1>
-        <p className="welcome-section">CS Student at UT Austin | Robotics AI & Automation</p>
+        <p className="welcome-section">Computer Science Student at the University of Texas at Austin</p>
         <div className="header-subrow">
           <IconRow items={icons} />
           <button
