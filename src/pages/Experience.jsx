@@ -1,8 +1,10 @@
 import './Experience.css'
 import React from 'react';
-import { useState, useCallback, useEffect, useRef  } from "react";
-import { motion, useScroll, useTransform, useMotionValue, useMotionValueEvent } from "framer-motion";
+import { useState, useCallback, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useNavigate } from 'react-router-dom';
 import Contact from '../Contact';
+
 function throttle(func, delay) {
   let lastCall = 0;
   return (...args) => {
@@ -26,15 +28,12 @@ export const TiltEffect = ({ children }) => {
       const centerY = box.height / 2;
       const rotateX = (y - centerY) / 15;
       const rotateY = (centerX - x) / 15;
-
       setRotate({ x: rotateX, y: rotateY });
     }, 100),
     []
   );
 
-  const onMouseLeave = () => {
-    setRotate({ x: 0, y: 0 });
-  };
+  const onMouseLeave = () => setRotate({ x: 0, y: 0 });
 
   return (
     <div
@@ -51,12 +50,19 @@ export const TiltEffect = ({ children }) => {
   );
 };
 
-function ProjectCard({ imageSrc, title, githubUrl, description, delay, bgColor}) {
+function ProjectCard({ imageSrc, title, githubUrl, description, delay, bgColor, route}) {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    if (route)
+        window.open(route, '_blank');
+    else window.open(githubUrl, '_blank');
+  }
   return (
     <TiltEffect>
       <div
         className="project-card"
         style={{ animationDelay: `${delay}s`, '--bg-color': bgColor  }}
+        onClick={handleClick}
       >
         <div className="project-image-container">
           <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="project-link">
@@ -82,8 +88,8 @@ function WorkCard({ title, description, dateRange, width, idx, color }) {
   const startOffset = idx * staggerFactor;
 
   const y = useTransform(
-    scrollYProgress, 
-    [0, startOffset, 0.3 + startOffset, 1], 
+    scrollYProgress,
+    [0, startOffset, 0.3 + startOffset, 1],
     [150, 50, 0, 0]
   );
 
@@ -93,11 +99,7 @@ function WorkCard({ title, description, dateRange, width, idx, color }) {
     <motion.div
       ref={ref}
       className="work-card"
-      style={{
-        gridColumn,
-        y: y,
-        background: color
-      }}
+      style={{ gridColumn, y, background: color }}
     >
       <div className="work-header">
         <h1 className="work-title">{title}</h1>
@@ -108,7 +110,6 @@ function WorkCard({ title, description, dateRange, width, idx, color }) {
   );
 }
 
-
 function Work({ items }) {
   return (
     <div className="work-grid">
@@ -116,10 +117,10 @@ function Work({ items }) {
         <WorkCard key={idx} idx={idx} {...item} />
       ))}
     </div>
-  )
+  );
 }
 
-function TechItem({columnTitle, columnElements}) {
+function TechItem({ columnTitle, columnElements }) {
   return (
     <div className="tech-item">
       <p className="tech-title">{columnTitle}</p>
@@ -129,20 +130,20 @@ function TechItem({columnTitle, columnElements}) {
         ))}
       </ul>
     </div>
-  )
+  );
 }
 
-function TechStack({items}) {
+function TechStack({ items }) {
   return (
     <div className="tech-grid">
       {items.map((item, idx) => (
         <TechItem key={idx} idx={idx} {...item} />
       ))}
     </div>
-  )
+  );
 }
 
-function IconRow({items}) {
+function IconRow({ items }) {
   return (
     <div className="icon-row">
       {items.map((item, idx) => (
@@ -161,8 +162,34 @@ function Icon({ imageSrc, URL }) {
 }
 
 function Experience() {
+  const navRef = useRef(null);
+  const [hoverStyle, setHoverStyle] = useState({ x: 0, y: 0, width: 0, height: 0, opacity: 0 });
+
+  const handleHover = (e) => {
+    const link = e.currentTarget;
+    const nav = navRef.current;
+    const linkRect = link.getBoundingClientRect();
+    const navRect = nav.getBoundingClientRect();
+    setHoverStyle({
+      x: linkRect.left - navRect.left,
+      y: linkRect.top - navRect.top,
+      width: linkRect.width,
+      height: linkRect.height,
+      opacity: 1,
+    });
+  };
+
+  const clearHover = () => setHoverStyle((prev) => ({ ...prev, opacity: 0 }));
 
   const projects = [
+    {
+      imageSrc: './images/arch-linux.png',
+      title: 'Multicore Distributed Operating System',
+      githubUrl: 'https://github.com/JonahBlackmon/ur5-greeting-imitation',
+      description: 'Built a teaching operating system for x86 multicore systems in a team environment. Implemented kernel subsystems including scheduling, preemption, signals, and coroutines',
+      bgColor: "#B4E1FF",
+      route: "/projects/multicore"
+    },
     {
       imageSrc: './images/ur5-arm.png',
       title: 'UR5 Greeting and Imitation',
@@ -216,15 +243,15 @@ function Experience() {
 
   const work = [
     {
-      title: "Undergraduate Course Assistant for Discrete Mathematics",
-      description: "Teaching Assistant for Discrete Mathematics (CS 311) at the University of Texas at Austin. Supported instruction for 400+ students by holding office hours and leading weekly discussion sections (~60 students) to reinforce course concepts",
+      title: "Undergraduate Course Assistant",
+      description: "Teaching Assistant for Discrete Mathematics and Elements of Software Design at the University of Texas at Austin. Supported instruction for 400+ students by holding office hours and leading weekly discussion sections (~60 students) to reinforce course concepts",
       dateRange: "Aug 2025 - Present",
       width: "100%",
       color: "#D3B5FF"
     },
     {
       title: "Autonomous Intelligent Robotics Research",
-      description: "Member of UT Austin’s Freshman Research Initiative (FRI) program with a focus on autonomous intelligent robotics and their role in human-robot interaction. Led the development of gesture-based interaction models for industrial robots, exploring social signaling and autonomous behavior in shared workspaces",
+      description: "Member of UT Austin's Freshman Research Initiative (FRI) program with a focus on autonomous intelligent robotics and their role in human-robot interaction. Led the development of gesture-based interaction models for industrial robots, exploring social signaling and autonomous behavior in shared workspaces",
       dateRange: "Jan 2025 - Present",
       width: "50%",
       color: "#B4E1FF"
@@ -287,43 +314,62 @@ function Experience() {
 
   return (
     <>
+      <nav className="global-navbar" ref={navRef}>
+        <motion.div
+          className="nav-hover-bg"
+          animate={hoverStyle}
+          transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+        />
+        <a
+          href="#home"
+          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          onMouseEnter={handleHover}
+          onMouseLeave={clearHover}
+          className="nav-link"
+        >
+          Home
+        </a>
+        <a href="#projects" onMouseEnter={handleHover} onMouseLeave={clearHover} className="nav-link">Projects</a>
+        <a href="#experience" onMouseEnter={handleHover} onMouseLeave={clearHover} className="nav-link">Experience</a>
+        <a href="#contact" onMouseEnter={handleHover} onMouseLeave={clearHover} className="nav-link">Contact Me</a>
+      </nav>
       <div className="experience-text">
-      <div className="about-me">
-        <h1 className="my-name">Jonah Blackmon</h1>
-        <p className="welcome-section">Computer Science Student at the University of Texas at Austin</p>
-        <div className="header-subrow">
-          <IconRow items={icons} />
-          <button
-            onClick={() => window.open('./images/Jonah Blackmon - College Resume.pdf', '_blank')}
-            className="resume-button"
-          >
-            View My Resume
-          </button>
+        <div className="about-me">
+          <h1 className="my-name">Jonah Blackmon</h1>
+          <p className="welcome-section">Computer Science Student at the University of Texas at Austin</p>
+          <div className="header-subrow">
+            <IconRow items={icons} />
+            <button
+              onClick={() => window.open('./images/Jonah Blackmon - College Resume.pdf', '_blank')}
+              className="resume-button"
+            >
+              View My Resume
+            </button>
+          </div>
         </div>
-      </div>
-      <section id="projects">
-      <h1 className="experience-title">Projects</h1>
-      </section>
-      <div className="projects-container">
-      <div className="projects-grid">
-        {projects.map((project, idx) => (
-          <ProjectCard key={idx} delay={idx * 0.1} {...project} />
-        ))}
-      </div>
-      </div>
-      <section id="experience">
-      <h1 className="work-experience">Experience</h1>
-      </section>
-      <Work items={work} />
-      <h1 className="tech-stack">Tech Stack</h1>
-      <TechStack items={tech} />
-      <section id="contact">
-      <h1 className="contact">Contact Me</h1>
-      </section>
-      <Contact />
+        <section id="projects">
+          <h1 className="experience-title">Projects</h1>
+        </section>
+        <div className="projects-container">
+          <div className="projects-grid">
+            {projects.map((project, idx) => (
+              <ProjectCard key={idx} delay={idx * 0.1} {...project} />
+            ))}
+          </div>
+        </div>
+        <section id="experience">
+          <h1 className="work-experience">Experience</h1>
+        </section>
+        <Work items={work} />
+        <h1 className="tech-stack">Tech Stack</h1>
+        <TechStack items={tech} />
+        <section id="contact">
+          <h1 className="contact">Contact Me</h1>
+        </section>
+        <Contact />
       </div>
     </>
   );
 }
 
-export default Experience
+export default Experience;
